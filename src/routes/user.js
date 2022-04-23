@@ -15,7 +15,6 @@ router.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { secure: true, httpOnly: true, sameSite: "none" },
   })
 );
 
@@ -33,7 +32,6 @@ router.post("/login", (req, res, next) => {
       req.logIn(user, (err) => {
         if (err) throw err;
         res.send("Successfully Authenticated");
-        console.log(req.user);
       });
     }
   })(req, res, next);
