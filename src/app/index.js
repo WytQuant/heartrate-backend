@@ -14,7 +14,7 @@ const app = express();
 app.set("trust proxy", 1);
 //---------------------------------------- End of import ----------
 
-if (config.isVercel) {
+if (true) {
   app.use(async (req, res, next) => {
     await mongoose.connect(config.mongoUri, config.mongoOptions, {
       useNewUrlParser: true,

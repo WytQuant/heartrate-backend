@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const router = express.Router();
 const User = require("../models/User");
 const activityRecords = require("./activityRecords");
+const MongoStore = require("connect-mongo");
 
 // defined router user record activities path
 router.use("/me/records", activityRecords);
@@ -15,6 +16,9 @@ router.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_PROJECTNAME}.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+    }),
   })
 );
 
