@@ -43,7 +43,16 @@ app.use(
     resave: true,
     saveUninitialized: true,
     store: MongoStore.create({
-      mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_PROJECTNAME}.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+      mongoUrl:
+        "mongodb+srv://" +
+        process.env.MONGO_USER +
+        ":" +
+        process.env.MONGO_PASSWORD +
+        "@" +
+        process.env.MONGO_PROJECTNAME +
+        ".mongodb.net/" +
+        process.env.MONGO_DATABASE +
+        "?retryWrites=true&w=majority",
     }),
   })
 );
