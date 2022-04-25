@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 
 module.exports = {
   isVercel: process.env.IS_VERCEL || false,
@@ -9,6 +9,6 @@ module.exports = {
     pass: process.env.MONGO_PASSWORD,
     dbName: process.env.MONGO_DATABASE,
     retryWrites: true,
-    w: "majority",
+    w: 'majority',
   },
 };

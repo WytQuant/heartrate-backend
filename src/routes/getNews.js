@@ -1,39 +1,39 @@
-const express = require("express");
-const axios = require("axios");
-const cheerio = require("cheerio");
+const express = require('express');
+const axios = require('axios');
+const cheerio = require('cheerio');
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const url =
-      "https://www.verywellfit.com/nutrition-and-fitness-news-4844931";
+      'https://www.verywellfit.com/nutrition-and-fitness-news-4844931';
     const data = await axios.get(url);
     if (data.status !== 200) {
       return res.status(data.status).send({
-        message: "Invalid url",
+        message: 'Invalid url',
       });
     }
 
     const html = await data.data;
     const $ = cheerio.load(html);
 
-    const listArticles = $("#mntl-taxonomysc-article-list_1-0 a");
+    const listArticles = $('#mntl-taxonomysc-article-list_1-0 a');
     const articles = [];
 
     listArticles.each((idx, el) => {
       const title = $(el)
-        .find("div.card__content > span.card__title > span.card__title-text")
+        .find('div.card__content > span.card__title > span.card__title-text')
         .text()
         .trim();
 
       const imageUrl = $(el)
-        .find("div.card__media > img")
-        .attr("data-src")
+        .find('div.card__media > img')
+        .attr('data-src')
         .trim();
 
-      const imgAlt = $(el).find("div.card__media > img").attr("alt").trim();
+      const imgAlt = $(el).find('div.card__media > img').attr('alt').trim();
 
-      const url = $(el).attr("href").trim();
+      const url = $(el).attr('href').trim();
 
       articles.push({
         title,
@@ -43,23 +43,23 @@ router.get("/", async (req, res) => {
       });
     });
 
-    const listSpotlightArticles = $("#mntl-document-spotlight_1-0 a");
+    const listSpotlightArticles = $('#mntl-document-spotlight_1-0 a');
     const spotlightarticles = [];
 
     listSpotlightArticles.each((idx, el) => {
       const title = $(el)
-        .find("div.card__content > span.card__title > span.card__title-text")
+        .find('div.card__content > span.card__title > span.card__title-text')
         .text()
         .trim();
 
       const imageUrl = $(el)
-        .find("div.card__media > img")
-        .attr("data-src")
+        .find('div.card__media > img')
+        .attr('data-src')
         .trim();
 
-      const imgAlt = $(el).find("div.card__media > img").attr("alt").trim();
+      const imgAlt = $(el).find('div.card__media > img').attr('alt').trim();
 
-      const url = $(el).attr("href").trim();
+      const url = $(el).attr('href').trim();
 
       spotlightarticles.push({
         title,

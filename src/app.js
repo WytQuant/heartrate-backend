@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const app = require("../api/index");
-const config = require("./config");
+const mongoose = require('mongoose');
+const app = require('../api/index');
+const config = require('./config');
 //----------------------- Starting server ---------------------
 
 const boot = async () => {

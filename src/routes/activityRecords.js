@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const User = require("../models/User");
+const User = require('../models/User');
 
 // get all of activities
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const userProfile = await User.findOne({ username: req.body.username });
   const userRecords = userProfile.activityRecords;
   return res.status(200).send(userRecords);
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 // });
 
 // create activity record
-router.post("/create", async (req, res) => {
+router.post('/create', async (req, res) => {
   const body = req.body;
   const userProfile = await User.findOne({ username: body.username });
   const userRecords = userProfile.activityRecords;
@@ -27,11 +27,11 @@ router.post("/create", async (req, res) => {
 
   userProfile.activityRecords.push(body);
   await userProfile.save();
-  return res.status(201).send("Created successful!!");
+  return res.status(201).send('Created successful!!');
 });
 
 //updating record
-router.put("/update", async (req, res, next) => {
+router.put('/update', async (req, res, next) => {
   const body = req.body;
   const userProfile = await User.findOne({ username: body.username });
   const userRecords = userProfile.activityRecords;
@@ -48,7 +48,7 @@ router.put("/update", async (req, res, next) => {
 });
 
 // delete record
-router.delete("/:username/:recordId", async (req, res, next) => {
+router.delete('/:username/:recordId', async (req, res, next) => {
   const { username, recordId } = req.params;
   const userProfile = await User.findOne({ username: username });
   const userRecords = userProfile.activityRecords;

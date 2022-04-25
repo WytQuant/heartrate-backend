@@ -1,13 +1,13 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
 
 const router = express.Router();
-const User = require("../models/User");
-const activityRecords = require("./activityRecords");
+const User = require('../models/User');
+const activityRecords = require('./activityRecords');
 
 // defined router user record activities path
-router.use("/me/records", activityRecords);
+router.use('/me/records', activityRecords);
 
 // router.use(
 //   session({
@@ -26,23 +26,23 @@ router.use("/me/records", activityRecords);
 // require("../passport/passportConfig")(passport);
 
 // CRUD
-router.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
     if (err) throw err;
-    if (!user) res.send("Your email or password was wrong!");
+    if (!user) res.send('Your email or password was wrong!');
     else {
       req.logIn(user, (err) => {
         if (err) throw err;
-        res.send("Successfully Authenticated");
+        res.send('Successfully Authenticated');
       });
     }
   })(req, res, next);
 });
 
-router.post("/signup", (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   User.findOne({ username: req.body.username }, async (err, doc) => {
     if (err) throw err;
-    if (doc) res.send("User already exists");
+    if (doc) res.send('User already exists');
     if (!doc) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       const newUser = new User({
@@ -50,12 +50,12 @@ router.post("/signup", (req, res, next) => {
         password: hashedPassword,
       });
       await newUser.save();
-      res.send("Created new user!!");
+      res.send('Created new user!!');
     }
   });
 });
 
-router.get("/me", (req, res) => {
+router.get('/me', (req, res) => {
   res.send(req.user);
 });
 
