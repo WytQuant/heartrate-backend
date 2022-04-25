@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const app = require("./app/index");
+const app = require("../api/index");
 const config = require("./config");
 //----------------------- Starting server ---------------------
 
