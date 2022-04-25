@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: 'http://localhost:3000',
     optionsSuccessStatus: 200, //access-control-allow-credentials:true
     credentials: true,
   })
@@ -53,7 +53,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    // cookie: { secure: true, httpOnly: true, sameSite: 'none' },
+    cookie: { secure: true, httpOnly: true, sameSite: 'none' },
     store: MongoStore.create({
       mongoUrl:
         'mongodb+srv://' +
