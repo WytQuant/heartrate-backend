@@ -1,31 +1,29 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const session = require("express-session");
-const cookieParser = require("cookie-parser");
+
 const router = express.Router();
 const User = require("../models/User");
 const activityRecords = require("./activityRecords");
-const MongoStore = require("connect-mongo");
 
 // defined router user record activities path
 router.use("/me/records", activityRecords);
 
-router.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_PROJECTNAME}.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
-    }),
-  })
-);
+// router.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: true,
+//     saveUninitialized: true,
+//     store: MongoStore.create({
+//       mongoUrl: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_PROJECTNAME}.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
+//     }),
+//   })
+// );
 
-router.use(cookieParser(process.env.SESSION_SECRET));
-router.use(passport.initialize());
-router.use(passport.session());
-require("../passport/passportConfig")(passport);
+// router.use(cookieParser(process.env.SESSION_SECRET));
+// router.use(passport.initialize());
+// router.use(passport.session());
+// require("../passport/passportConfig")(passport);
 
 // CRUD
 router.post("/login", (req, res, next) => {
