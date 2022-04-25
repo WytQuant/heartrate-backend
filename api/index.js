@@ -51,7 +51,7 @@ app.use(
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
-require("../passport/passportConfig")(passport);
+require("../src/passport/passportConfig")(passport);
 
 app.use("/users", userRouter);
 app.use("/getnews", getNews);
