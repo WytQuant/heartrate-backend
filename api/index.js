@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
 
 require("dotenv").config();
-const config = require("../config");
+const config = require("../src/config");
 
 const userRouter = require("../src/routes/user");
 const getNews = require("../src/routes/getNews");
@@ -17,7 +17,7 @@ const app = express();
 app.set("trust proxy", 1);
 //---------------------------------------- End of import ----------
 
-if (config.isVercel) {
+if (true) {
   app.use(async (req, res, next) => {
     await mongoose.connect(config.mongoUri, config.mongoOptions, {
       useNewUrlParser: true,
