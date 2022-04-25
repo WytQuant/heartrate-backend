@@ -19,7 +19,18 @@ app.set("trust proxy", 1);
 
 if (true) {
   app.use(async (req, res, next) => {
-    await mongoose.connect(config.mongoUri, config.mongoOptions, {
+    const URL =
+      "mongodb+srv://" +
+      process.env.MONGO_USER +
+      ":" +
+      process.env.MONGO_PASSWORD +
+      "@" +
+      process.env.MONGO_PROJECTNAME +
+      ".mongodb.net/" +
+      process.env.MONGO_DATABASE +
+      "?retryWrites=true&w=majority";
+
+    await mongoose.connect(URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
