@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://heartrateapp.vercel.app',
     optionsSuccessStatus: 200, //access-control-allow-credentials:true
     credentials: true,
   })
